@@ -1,10 +1,10 @@
 import { ColorSwatch, Group } from '@mantine/core';
-import {Button} from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Draggable from 'react-draggable';
 import {SWATCHES} from '@/constants';
-//import {LazyBrush} from 'lazy-brush';
+// import {LazyBrush} from 'lazy-brush';
 
 interface GeneratedResult {
     expression: string;
@@ -33,13 +33,13 @@ export default function Home() {
     //     initialPoint: { x: 0, y: 0 },
     // });
 
-    // useEffect(() => {
-    //     if (latexExpression.length > 0 && window.MathJax) {
-    //         setTimeout(() => {
-    //             window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
-    //         }, 0);
-    //     }
-    // }, [latexExpression]);
+    useEffect(() => {
+        if (latexExpression.length > 0 && window.MathJax) {
+            setTimeout(() => {
+                window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
+            }, 0);
+        }
+    }, [latexExpression]);
 
     useEffect(() => {
         if (result) {
@@ -70,17 +70,16 @@ export default function Home() {
             }
 
         }
-
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML';
         script.async = true;
         document.head.appendChild(script);
 
-        // script.onload = () => {
-        //     window.MathJax.Hub.Config({
-        //         tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
-        //     });
-        // };
+        script.onload = () => {
+            window.MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+            });
+        };
 
         return () => {
             document.head.removeChild(script);
@@ -101,6 +100,7 @@ export default function Home() {
             }
         }
     };
+
 
     const resetCanvas = () => {
         const canvas = canvasRef.current;
@@ -221,7 +221,7 @@ export default function Home() {
                 >
                     Run
                 </Button>
-            </div> 
+            </div>
             <canvas
                 ref={canvasRef}
                 id='canvas'
