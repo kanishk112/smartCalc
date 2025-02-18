@@ -1,6 +1,6 @@
 **Smart AI calculator**
 
-This AI calculator is made with Use of Gemini AI api itegrated with python and React Native
+This AI calculator is made with Use of Gemini AI api integrated with python and React Native
 the demo of this project can be seen in the above video
 
 
